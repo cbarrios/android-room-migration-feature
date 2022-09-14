@@ -16,17 +16,20 @@ class MainActivity : AppCompatActivity() {
             applicationContext,
             Database::class.java,
             "users.db"
-        ).build()
+        ).addMigrations(Database.migration3To4).build()
 
-        readFirstUsers(db)
+        //readFirstUsers(db)
         //insertFirstUsers(db)
+
+        readSchools(db)
+        //insertSchools(db)
     }
 
-    private fun readFirstUsers(db: Database) {
-        lifecycleScope.launch {
-            db.userDao.getUsers().forEach(::println)
-        }
-    }
+//    private fun readFirstUsers(db: Database) {
+//        lifecycleScope.launch {
+//            db.userDao.getUsers().forEach(::println)
+//        }
+//    }
 
 //    private fun insertFirstUsers(db: Database) {
 //        (1..10).forEach {
@@ -36,6 +39,22 @@ class MainActivity : AppCompatActivity() {
 //                        email = "test@test$it.com",
 //                        username = "test$it"
 //                    )
+//                )
+//            }
+//        }
+//    }
+
+    private fun readSchools(db: Database) {
+        lifecycleScope.launch {
+            db.schoolDao.getSchools().forEach(::println)
+        }
+    }
+
+//    private fun insertSchools(db: Database) {
+//        (1..10).forEach {
+//            lifecycleScope.launch {
+//                db.schoolDao.insertSchool(
+//                    School(name = "School$it")
 //                )
 //            }
 //        }
